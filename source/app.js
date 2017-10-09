@@ -1,19 +1,28 @@
 'use strict';
 
-const config = require('../config.json'),
-	Koa = require('koa'),
-	Router = require('koa-router'),
-	app = new Koa(),
-	router = new Router(),
-	controller = require('./controller.js'),
-	middleware = require('./middleware.js');
+const config = require('../config.json');
+const Koa = require('koa');
+const Router = require('koa-router');
+const serve = require('koa-static');
+const app = new Koa();
+const router = new Router();
+const controller = require('./controller.js');
+const middleware = require('./middleware.js');
+const ReactDOMServer = require('react-dom/server');
+const logger = require('../libs/logger.js')('wallet-app');
 
 router.get('/cards/', controller.getCards);
 router.post('/cards/', controller.createCard);
 router.delete('/cards/:id', controller.deleteCard);
 router.get('/error', controller.error);
 
+// console.log(ReactDOMServer.renderToString());
+
 app.use(middleware.common);
 app.use(router.routes());
 
-app.listen(config.port);
+app.use(serve('./public'));
+
+app.listen(config.port, () => {
+    logger.log('info', 'It\'s alive!')
+});
