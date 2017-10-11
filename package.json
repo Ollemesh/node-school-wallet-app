@@ -5,7 +5,8 @@
 	"author": "",
 	"scripts": {
 		"start": "node index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"precommit": "eslint ."
 	},
 	"repository": {
 		"type": "git",
@@ -16,6 +17,7 @@
 		"node": "^8.2"
 	},
 	"dependencies": {
+		"husky": "^0.14.3",
 		"koa": "^2.3.0",
 		"koa-bodyparser": "^4.2.0",
 		"koa-compose": "^4.0.0",
@@ -35,6 +37,7 @@
 		"card-info": "git+https://github.com/iniel/card-info.git",
 		"css-loader": "^0.28.7",
 		"emotion": "^7.2.0",
+		"eslint-config-airbnb": "^16.0.0",
 		"moment": "^2.18.1",
 		"react": "^16.0.0",
 		"react-dom": "^16.0.0",

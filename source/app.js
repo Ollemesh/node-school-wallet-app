@@ -16,6 +16,11 @@ router.post('/cards/', controller.createCard);
 router.delete('/cards/:id', controller.deleteCard);
 router.get('/error', controller.error);
 
+router.get('/cards/:id/transactions/', controller.getTransactions);
+router.post('/cards/:id/transactions/', controller.createTransaction);
+
+router.post('cards/:id/pay', controller.pay)
+
 // console.log(ReactDOMServer.renderToString());
 
 app.use(middleware.common);
