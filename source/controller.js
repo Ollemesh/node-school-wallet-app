@@ -4,6 +4,7 @@ const models = require('./models.js');
 
 module.exports = {
 	getCards: async function (ctx) {
+		ctx.status = 200;		
 		ctx.body = await new models.Cards().getAll();
 		/* 
 		    Я создаю экземпляр модели в каждом контроллере, а не в middleware,
@@ -31,24 +32,28 @@ module.exports = {
 		let txs = await new models.Transactions();
 
 		await cards.spend({
-			id: ctx.request.params.id,
-			amount: ctx.request.params.amount
+			id: ctx.params.id,
+			amount: ctx.body.amount
 		})
 
 		await txs.create({
-			cardId: ctx.request.params.id,
+			cardId: ctx.params.id,
 			type: 'fillModile',
-			data: cards.getAll()[ctx.request.params.id].id,
-			sum: ctx.request.params.amount
+			data: cards.getAll()[ctx.params.id].id,
+			sum: ctx.body.amount
 		})
 
 		ctx.status = 200;
 		ctx.body = 'OK';		
 	},
-	getTransactions: async function (ctx) {
-		
+	getTransaction: async function (ctx) {
+		ctx.status = 200;
+		ctx.body = await new models.Transactions().getByCardId(ctx.params.id);
 	},
 	createTransaction: async function (ctx) {
-
+		let newTx = ctx.request.body;
+		newTx.cardId = ctx.params.id;
+		ctx.status = 200;
+		ctx.body = await new models.Transactions().create(newTx);
 	}
 };

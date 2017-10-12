@@ -3,15 +3,22 @@
 const fs = require('fs');
 
 module.exports = class {
-	constructor(filePath = `${__dirname}/../../transactions.json`) {
+	constructor(filePath = `${__dirname}/../../data/transactions.json`) {
 		this._filePath = filePath;
 	}
 
-	async get(id) {
+	async getById(id) {
         this.txs = await this._readFile();
-        let tx = this.txs.find(tx => tx.id === id);
+        let tx = this.txs.find(tx => tx.id == id);
         if (!tx) this._throwError(100, 'Transaction not found');
         return tx;
+	}
+
+	async getByCardId(id) {
+        this.txs = await this._readFile();
+        let filtered = this.txs.filter(tx => tx.cardId == id);
+        if (!filtered.length) this._throwError(100, 'Transactions not found');
+        return filtered;
 	}
 
 	async create(newTx) {
@@ -29,7 +36,7 @@ module.exports = class {
 			sum: newTx.sum
 		})
         await this._writeFile(this.txs);
-        return newCard;
+        return newTx;
     }
 
     // "id": 1,

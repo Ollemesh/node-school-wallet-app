@@ -4,7 +4,7 @@ const fs = require('fs'),
     luhn = require('luhn');
 
 module.exports = class {
-	constructor(filePath = `${__dirname}/../../cards.json`) {
+	constructor(filePath = `${__dirname}/../../data/cards.json`) {
 		this._filePath = filePath;
 	}
 
