@@ -43,15 +43,25 @@ module.exports = class {
 
 	async spend(data) {
 		this.cards = await this._readFile();
-		data.amount = this.cards[data.id].balance - data.amount;
-		if (data.amount < 0) this._throwError(400, 'Not anough money')
-		this._update(data)
+		
+		let card = this.cards.find(card => card.id == data.id);
+		if (!card) this._throwError(400, 'Invalid card ID');
+		
+		data.amount = parseInt(data.amount, 10);
+		if(!data.amount) this._throwError(400, 'Wrond amount');
+
+		let newBalance = card.balance - data.amount;
+		if (newBalance < 0) this._throwError(400, 'Not anough money');
+		await this._update({
+			id: data.id,
+			balance: newBalance
+		});
 	}
-	
+
 	async _update(data) {
 		this.cards = await this._readFile();
-		for (prop in data) {
-			this.cards[data.id][prop] = data[prop]
+		for (let prop in data) {
+			this.cards.find(card => card.id == data.id)[prop] = data[prop];
 		}
 		await this._writeFile(this.cards);		
 	}

@@ -19,6 +19,9 @@ async function errorHandler(ctx, next) {
 	try {
 		await next();
 	} catch (err) {
+
+		console.log('ERROR', err.message, err.stack)
+
 		ctx.status = err.status || 500;
 		ctx.body = err.message;
 	}

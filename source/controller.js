@@ -33,14 +33,14 @@ module.exports = {
 
 		await cards.spend({
 			id: ctx.params.id,
-			amount: ctx.body.amount
+			amount: ctx.request.body.amount
 		})
 
 		await txs.create({
 			cardId: ctx.params.id,
-			type: 'fillModile',
-			data: cards.getAll()[ctx.params.id].id,
-			sum: ctx.body.amount
+			type: 'card2phonec',
+			data: ctx.request.body.number,
+			sum: ctx.request.body.amount
 		})
 
 		ctx.status = 200;
