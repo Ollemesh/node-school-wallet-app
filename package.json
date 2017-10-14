@@ -37,10 +37,12 @@
 		"css-loader": "^0.28.7",
 		"emotion": "^7.2.0",
 		"eslint-config-airbnb": "^16.0.0",
+		"jest": "^21.2.1",
 		"moment": "^2.18.1",
 		"react": "^16.0.0",
 		"react-dom": "^16.0.0",
 		"style-loader": "^0.19.0",
+		"supertest": "^3.0.0",
 		"webpack": "^3.5.5"
 	}
 }

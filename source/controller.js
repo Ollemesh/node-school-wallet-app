@@ -4,7 +4,7 @@ const models = require('./models.js');
 
 module.exports = {
 	getCards: async function (ctx) {
-		ctx.status = 200;		
+		ctx.status = 200;
 		ctx.body = await new models.Cards().getAll();
 		/* 
 		    Я создаю экземпляр модели в каждом контроллере, а не в middleware,
@@ -24,27 +24,68 @@ module.exports = {
 		await new models.Cards().delete(ctx.params.id);
 		ctx.body = 'OK';
 	},
-	error: async function (ctx) {
-		throw new Error('Oops!');
-	},
 	pay: async function (ctx) {
 		let cards = await new models.Cards();
 		let txs = await new models.Transactions();
 
-		await cards.spend({
-			id: ctx.params.id,
-			amount: ctx.request.body.amount
-		})
+		await cards.spend(ctx.params.id, ctx.request.body.amount)
 
 		await txs.create({
 			cardId: ctx.params.id,
-			type: 'card2phonec',
+			type: 'card2phone',
 			data: ctx.request.body.number,
 			sum: ctx.request.body.amount
 		})
 
 		ctx.status = 200;
-		ctx.body = 'OK';		
+		ctx.body = 'OK';
+	},
+	fill: async function (ctx) {
+		let cards = await new models.Cards();
+		let txs = await new models.Transactions();
+
+		await cards.receive(ctx.params.id, ctx.request.body.amount)
+
+		await txs.create({
+			cardId: ctx.params.id,
+			type: 'phone2card',
+			data: ctx.request.body.number,
+			sum: ctx.request.body.amount
+		})
+
+		ctx.status = 200;
+		ctx.body = 'OK';
+	},
+	transfer: async function (ctx) {
+		const cards = new models.Cards();
+		const txs = new models.Transactions();
+		const cardId = ctx.params.id;
+		const receiverCardId = ctx.request.body.recieverCardId;
+		const amount = ctx.request.body.amount; 
+
+		await cards.spend({
+			id: cardId,
+			amount: amount
+		});
+		await cards.receive({
+			id: receiverCardId,
+			amount: amount
+		});
+		await txs.create({
+			cardId: cardId,
+			type: 'spend',
+			data: `transfer to cardId ${receiverCardId}`,
+			sum: amount
+		});
+		await txs.create({
+			cardId: receiverCardId,
+			type: 'receive',
+			data: `transfer from cardId ${cardId}`,
+			sum: amount
+		});
+
+		ctx.status = 200;
+		ctx.body = 'OK';
 	},
 	getTransaction: async function (ctx) {
 		ctx.status = 200;
@@ -55,5 +96,8 @@ module.exports = {
 		newTx.cardId = ctx.params.id;
 		ctx.status = 200;
 		ctx.body = await new models.Transactions().create(newTx);
+	},
+	error: async function (ctx) {
+		throw new Error('Oops!');
 	}
 };

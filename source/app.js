@@ -20,6 +20,8 @@ router.get('/cards/:id/transactions/', controller.getTransaction);
 router.post('/cards/:id/transactions/', controller.createTransaction);
 
 router.post('/cards/:id/pay', controller.pay);
+router.post('/cards/:id/transfer', controller.transfer)
+router.post('/cards/:id/fill', controller.fill)
 
 // console.log(ReactDOMServer.renderToString());
 
@@ -31,3 +33,5 @@ app.use(serve('./public'));
 app.listen(config.port, () => {
     logger.log('info', 'It\'s alive!')
 });
+
+module.exports = app;

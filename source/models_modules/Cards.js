@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs'),
-    luhn = require('luhn');
+	luhn = require('luhn');
 
 module.exports = class {
 	constructor(filePath = `${__dirname}/../../data/cards.json`) {
@@ -9,61 +9,79 @@ module.exports = class {
 	}
 
 	async getAll() {
-		return await this._readFile();
+		return this._get();
 	}
 
 	async create(newCard) {
-		this.cards = await this._readFile();
+		let cards = await this._readFile();
 
 		if (!(newCard.cardNumber && newCard.balance) ||
 			!luhn.validate(newCard.cardNumber) ||
-			this.cards.some(card => card.cardNumber == newCard.cardNumber)
+			cards.some(card => card.cardNumber == newCard.cardNumber)
 		) {
 			this._throwError(400, 'Bad request');
 		}
-		
-		newCard.id = this.cards.length;
-        
-        this.cards.push(newCard);
-        await this._writeFile(this.cards);
-        return newCard;
-    }
-    
-    async delete(id) {
-        this.cards = await this._readFile(),
-            deletingCard = this.cards[id];
 
-        if(!deletingCard) {
-            this._throwError(404, 'Card not found');
-        }
+		newCard.id = cards.length;
 
-        this.cards.splice(id, 1);
-		await this._writeFile(this.cards);
+		cards.push(newCard);
+		await this._writeFile(cards);
+		return newCard;
 	}
 
-	async spend(data) {
-		this.cards = await this._readFile();
-		
-		let card = this.cards.find(card => card.id == data.id);
-		if (!card) this._throwError(400, 'Invalid card ID');
-		
-		data.amount = parseInt(data.amount, 10);
-		if(!data.amount) this._throwError(400, 'Wrond amount');
+	async delete(id) {
+		let deletingCard = cards[id];
 
-		let newBalance = card.balance - data.amount;
+		if (!deletingCard) {
+			this._throwError(404, 'Card not found');
+		}
+
+		cards.splice(id, 1);
+		await this._writeFile(cards);
+	}
+
+	async spend(cardId, amount) {
+		const card = await this._getCardById(cardId);
+		amount = this._checkAmount(amount);
+
+		let newBalance = parseInt(card.balance, 10) - amount;
 		if (newBalance < 0) this._throwError(400, 'Not anough money');
+
 		await this._update({
-			id: data.id,
+			id: cardId,
 			balance: newBalance
 		});
 	}
 
-	async _update(data) {
-		this.cards = await this._readFile();
-		for (let prop in data) {
-			this.cards.find(card => card.id == data.id)[prop] = data[prop];
+	async receive(cardId, amount) {
+		const card = await this._getCardById(cardId);
+		amount = this._checkAmount(amount);
+
+		let newBalance = parseInt(card.balance, 10) + amount;
+
+		await this._update({
+			id: cardId,
+			balance: newBalance
+		});
+	}
+
+	async _get(cardData) {
+		let cards = await this._readFile();;
+
+		for (let prop in cardData) {
+			cards = cards.filter(card => card[prop] === cardData[prop]);
 		}
-		await this._writeFile(this.cards);		
+
+		return cards;
+	}
+
+	async _update(data) {
+		let cards = await this._readFile();
+
+		for (let prop in data) {
+			cards.find(card => card.id == data.id)[prop] = data[prop];
+		}
+		await this._writeFile(cards);
 	}
 
 	async _readFile() {
@@ -78,16 +96,30 @@ module.exports = class {
 				}
 			});
 		});
-    }
-    
-    async _writeFile(cards) {
-        return await new Promise((resolve, reject) => {
-            fs.writeFile(this._filePath, JSON.stringify(this.cards), (err) => {
-                if(err) reject(err);
-                resolve();
-            });
-        });
-    }
+	}
+
+	async _writeFile(cards) {
+		return await new Promise((resolve, reject) => {
+			fs.writeFile(this._filePath, JSON.stringify(cards), (err) => {
+				if (err) reject(err);
+				resolve();
+			});
+		});
+	}
+
+	async _getCardById(cardId) {
+		const card = (await this._get({
+			id: cardId
+		}))[0];
+		if (!card) this._throwError(400, 'Wrong card ID');
+		return card;
+	}
+
+	_checkAmount(amount) {
+		amount = parseInt(amount, 10);
+		if (!amount) this._throwError(400, 'Wrond amount');
+		return amount
+	}
 
 	_throwError(status, errorMessage) {
 		let error = new Error(errorMessage);
