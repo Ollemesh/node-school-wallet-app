@@ -13,7 +13,7 @@ module.exports = class {
 	}
 
 	async create(newCard) {
-		let cards = await this._readFile();
+		this.cards = await this._readFile();
 
 		if (!(newCard.cardNumber && newCard.balance) ||
 			!luhn.validate(newCard.cardNumber) ||
@@ -47,8 +47,7 @@ module.exports = class {
 		let newBalance = parseInt(card.balance, 10) - amount;
 		if (newBalance < 0) this._throwError(400, 'Not anough money');
 
-		await this._update({
-			id: cardId,
+		await this._updateCard(cardId, {
 			balance: newBalance
 		});
 	}
@@ -59,29 +58,29 @@ module.exports = class {
 
 		let newBalance = parseInt(card.balance, 10) + amount;
 
-		await this._update({
-			id: cardId,
+		await this._updateCard(cardId, {
 			balance: newBalance
 		});
 	}
 
 	async _get(cardData) {
-		let cards = await this._readFile();;
+		let cards = await this._readFile();
 
 		for (let prop in cardData) {
-			cards = cards.filter(card => card[prop] === cardData[prop]);
+			 cards = cards.filter(card => card[prop] == cardData[prop]);
 		}
 
 		return cards;
 	}
 
-	async _update(data) {
-		let cards = await this._readFile();
+	async _updateCard(id, updateData) {
+		this.cards = await this._readFile();
 
-		for (let prop in data) {
-			cards.find(card => card.id == data.id)[prop] = data[prop];
+		for (let prop in updateData) {
+			// cards.find(card => card[prop] == data[prop]);
+			this.cards.find(card => card.id == id)[prop] = updateData[prop];
 		}
-		await this._writeFile(cards);
+		await this._writeFile(this.cards);
 	}
 
 	async _readFile() {

@@ -60,17 +60,11 @@ module.exports = {
 		const cards = new models.Cards();
 		const txs = new models.Transactions();
 		const cardId = ctx.params.id;
-		const receiverCardId = ctx.request.body.recieverCardId;
-		const amount = ctx.request.body.amount; 
+		const receiverCardId = ctx.request.body.receiverCardId;
+		const amount = ctx.request.body.amount;
 
-		await cards.spend({
-			id: cardId,
-			amount: amount
-		});
-		await cards.receive({
-			id: receiverCardId,
-			amount: amount
-		});
+		await cards.spend(cardId, amount);
+		await cards.receive(receiverCardId, amount);
 		await txs.create({
 			cardId: cardId,
 			type: 'spend',
