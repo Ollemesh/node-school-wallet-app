@@ -1,6 +1,7 @@
 'use strict';
 
 const config = require('../config.json');
+const path = require('path');
 const Koa = require('koa');
 const Router = require('koa-router');
 const serve = require('koa-static');
@@ -10,6 +11,20 @@ const controller = require('./controller.js');
 const middleware = require('./middleware.js');
 const ReactDOMServer = require('react-dom/server');
 const logger = require('../libs/logger.js')('wallet-app');
+const {renderToStaticMarkup} = require('react-dom/server');
+
+const DATA = {
+	user: {
+		login: 'samuel_johnson',
+		name: 'Samuel Johnson'
+	}
+};
+
+function getView(viewId) {
+	const viewPath = path.resolve(__dirname, 'views', `${viewId}.server.js`);
+	delete require.cache[require.resolve(viewPath)];
+	return require(viewPath);
+}
 
 router.get('/cards/', controller.getCards);
 router.post('/cards/', controller.createCard);
@@ -27,6 +42,14 @@ router.post('/cards/:id/fill', controller.fill)
 
 app.use(middleware.common);
 app.use(router.routes());
+
+
+router.get('/', (ctx) => {
+	const indexView = getView('index');
+	const indexViewHtml = renderToStaticMarkup(indexView(DATA));
+
+	ctx.body = indexViewHtml;
+});
 
 app.use(serve('./public'));
 
