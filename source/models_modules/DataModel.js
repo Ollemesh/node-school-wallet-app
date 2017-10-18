@@ -15,14 +15,6 @@ module.exports = class {
 
 	async create(newUnitData) {
 		this.units = await this._readFile();
-
-		// if (!(newCard.cardNumber && newCard.balance) ||
-		// 	!luhn.validate(newCard.cardNumber) ||
-		// 	cards.some(card => card.cardNumber == newCard.cardNumber)
-		// ) {
-		// 	this._throwError(400, 'Bad request');
-		// }
-
 		newUnitData.id = units.length;
 
 		units.push(newUnitData);
