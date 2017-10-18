@@ -22,20 +22,24 @@ const BalanceSum = styled.span`
 	font-weight: bold;
 `;
 
-const Header = ({activeCard}) => (
+const Header = ({activeCard, user}) => (
 	<HeaderLayout>
 		<Balance>
 			{`${activeCard.bankName}: `}
 			<BalanceSum>{`${activeCard.balance} ₽`}</BalanceSum>
 		</Balance>
-		<UserInfo />
+		<UserInfo user={user} />
 	</HeaderLayout>
 );
 
 Header.propTypes = {
 	activeCard: PropTypes.shape({
 		bankName: PropTypes.string.isRequired,
-		balance: PropTypes.string.isRequired
+		balance: PropTypes.number.isRequired
+	}),
+	user: PropTypes.shape({
+		login: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired
 	})
 };
 
