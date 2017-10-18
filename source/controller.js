@@ -14,6 +14,10 @@ module.exports = {
 		    я зарефакторю чтение и запись файла/бд в middleware, сохраняя экземпляр модели в ctx
 		*/
 	},
+	getTransactions: async function (ctx) {
+		ctx.status = 200;
+		ctx.body = await new models.Transactions().getAll();
+	},
 	createCard: async function (ctx) {
 		let newCard = ctx.request.body;
 		ctx.status = 200;
