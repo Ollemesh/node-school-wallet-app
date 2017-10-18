@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
-import {Select} from './';
+import {Select, CardEdit} from './';
 
 const CardLayout = styled.div`
 	position: relative;
 	width: 260px;
 	height: 164px;
 	box-sizing: border-box;
-	margin-bottom: 15px;
+	margin-bottom: ${({isSingle}) => (isSingle ? 0 : '15px')};
 	padding: 25px 20px 20px 25px;
 	border-radius: 4px;
-	background-color: ${({bgColor, active}) => active ? bgColor : 'rgba(255, 255, 255, 0.1)'};
+	background-color: ${({bgColor, active}) => (active ? bgColor : 'rgba(255, 255, 255, 0.1)')};
 `;
 
 const CardLogo = styled.div`
@@ -20,12 +20,12 @@ const CardLogo = styled.div`
 	background-image: url(${({url}) => url});
 	background-size: contain;
 	background-repeat: no-repeat;
-	filter: ${({active}) => active ? 'none' : 'grayscale(100%) opacity(60%)'};
+	filter: ${({active}) => (active ? 'none' : 'grayscale(100%) opacity(60%)')};
 `;
 
 const CardNumber = styled.div`
 	margin-bottom: 20px;
-	color: ${({active, textColor}) => active ? textColor : 'rgba(255, 255, 255, 0.6)'};
+	color: ${({active, textColor}) => (active ? textColor : 'rgba(255, 255, 255, 0.6)')};
 	font-size: 16px;
 	font-family: 'OCR A Std Regular';
 `;
@@ -36,7 +36,7 @@ const CardType = styled.div`
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position-x: right;
-	opacity: ${({active}) => active ? '1' : '0.6'};
+	opacity: ${({active}) => (active ? '1' : '0.6')};
 `;
 
 const NewCardLayout = styled(CardLayout)`
@@ -86,8 +86,7 @@ class Card extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
-		const {data, type, active, onClick} = this.props;
-
+		const {data, type, active, isSingle, onClick, isCardsEditable, onChangeBarMode} = this.props;
 		if (type === 'new') {
 			return (
 				<NewCardLayout />
@@ -98,26 +97,35 @@ class Card extends Component {
 			const {activeCardIndex} = this.state;
 			const selectedCard = data[activeCardIndex];
 			const {bgColor, bankLogoUrl, brandLogoUrl} = selectedCard.theme;
+			const isActive = true;
 
 			return (
-				<CardLayout active={true} bgColor={bgColor}>
+				<CardLayout active={true} bgColor={bgColor} isCardsEditable={isCardsEditable} isSingle={isSingle}>
+					<CardEdit editable={isCardsEditable} id={data.id} onChangeBarMode={onChangeBarMode} />
 					<CardLogo url={bankLogoUrl} active={true} />
-					<CardSelect defaultValue='0' onChange={(activeCardIndex) => this.onCardChange(activeCardIndex)}>
+					<CardSelect defaultValue='0' onChange={(index) => this.onCardChange(index)}>
 						{data.map((card, index) => (
-							<Select.Option key={index} value={`${index}`}>{card.number}</Select.Option>
+							<Select.Option key={isActive} value={`${index}`}>{card.number}</Select.Option>
 						))}
 					</CardSelect>
-					<CardType url={brandLogoUrl} active={true} />
+					<CardType url={brandLogoUrl} active={isActive} />
 				</CardLayout>
 			);
 		}
 
-		const {number, theme} = data;
+		const {number, theme, id} = data;
 		const {bgColor, textColor, bankLogoUrl, brandLogoUrl} = theme;
 		const themedBrandLogoUrl = active ? brandLogoUrl : brandLogoUrl.replace(/-colored.svg$/, '-white.svg');
 
 		return (
-			<CardLayout active={active} bgColor={bgColor} onClick={onClick} >
+			<CardLayout
+				active={active}
+				bgColor={bgColor}
+				onClick={onClick}
+				isCardsEditable={isCardsEditable}
+				isSingle={isSingle}>
+
+				<CardEdit editable={isCardsEditable} id={id} onChangeBarMode={onChangeBarMode} />
 				<CardLogo url={bankLogoUrl} active={active} />
 				<CardNumber textColor={textColor} active={active}>
 					{number}
@@ -132,7 +140,10 @@ Card.propTypes = {
 	data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 	type: PropTypes.string,
 	active: PropTypes.bool,
-	onClick: PropTypes.func
+	isSingle: PropTypes.bool,
+	isCardsEditable: PropTypes.bool,
+	onClick: PropTypes.func,
+	onChangeBarMode: PropTypes.func
 };
 
 export default Card;

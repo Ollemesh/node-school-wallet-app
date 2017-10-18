@@ -26,6 +26,13 @@ function getView(viewId) {
 	return require(viewPath);
 }
 
+router.get('/', (ctx) => {
+	const indexView = getView('index');
+	const indexViewHtml = renderToStaticMarkup(indexView(DATA));
+
+	ctx.body = indexViewHtml;
+});
+
 router.get('/cards/', controller.getCards);
 router.post('/cards/', controller.createCard);
 router.delete('/cards/:id', controller.deleteCard);
@@ -38,18 +45,8 @@ router.post('/cards/:id/pay', controller.pay);
 router.post('/cards/:id/transfer', controller.transfer)
 router.post('/cards/:id/fill', controller.fill)
 
-// console.log(ReactDOMServer.renderToString());
-
 app.use(middleware.common);
 app.use(router.routes());
-
-
-router.get('/', (ctx) => {
-	const indexView = getView('index');
-	const indexViewHtml = renderToStaticMarkup(indexView(DATA));
-
-	ctx.body = indexViewHtml;
-});
 
 app.use(serve('./public'));
 

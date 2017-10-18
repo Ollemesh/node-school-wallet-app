@@ -5,7 +5,6 @@ import serialize from 'serialize-javascript';
 import {App} from '../client/components';
 
 module.exports = (appData) => {
-	// const app = renderToString(<div />);
 	const app = renderToString(<App data={appData} />);
 	const {html, ids, css} = extractCritical(app);
 	const viewData = `window.__data=${serialize({ids, appData})};`;
