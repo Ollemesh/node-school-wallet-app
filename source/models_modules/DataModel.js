@@ -1,11 +1,9 @@
 'use strict';
 
-const fs = require('fs'),
-	luhn = require('luhn');
+const fs = require('fs');
 
 module.exports = class {
 	constructor(filePath) {
-		super();
 		this._filePath = filePath;
 	}
 
@@ -15,22 +13,22 @@ module.exports = class {
 
 	async create(newUnitData) {
 		this.units = await this._readFile();
-		newUnitData.id = units.length;
+		newUnitData.id = this.units.length;
 
-		units.push(newUnitData);
-		await this._writeFile(units);
+		this.units.push(newUnitData);
+		await this._writeFile(this.units);
 		return newUnitData;
 	}
 
 	async delete(id) {
-		let deletingUnit = units[id];
+		let deletingUnit = this.units[id];
 
 		if (!deletingUnit) {
 			this._throwError(404, 'Data not found');
 		}
 
-		units.splice(id, 1);
-		await this._writeFile(units);
+		this.units.splice(id, 1);
+		await this._writeFile(this.units);
 	}
 
 	async _get(unitData) {
@@ -39,8 +37,7 @@ module.exports = class {
 		for (let prop in unitData) {
 			 units = units.filter(unit => unit[prop] == unitData[prop]);
 		}
-
-		return cards;
+		return units;
 	}
 
 	async _getById(id) {

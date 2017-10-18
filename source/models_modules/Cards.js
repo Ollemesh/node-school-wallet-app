@@ -1,6 +1,5 @@
 'use strict';
 
-const fs = require('fs');
 const luhn = require('luhn');
 const DataModel = require('./DataModel');
 const path = require('path');
