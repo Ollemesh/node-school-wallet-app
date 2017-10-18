@@ -1,6 +1,7 @@
 'use strict';
 
 const models = require('./models.js');
+const Joi = require('joi');
 
 module.exports = {
 	getCards: async function (ctx) {
@@ -92,6 +93,9 @@ module.exports = {
 	createTransaction: async function (ctx) {
 		let newTx = ctx.request.body;
 		newTx.cardId = ctx.params.id;
+		let {error, value} = Joi.validate(newTx, require('./schemas/transaction.js'));	
+		if(error) throw new Error('Wrong transactions data');
+		newTx = value;	
 		ctx.status = 200;
 		ctx.body = await new models.Transactions().create(newTx);
 	},
