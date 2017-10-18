@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
+import axios from 'axios';
 
 import {Island, Title, Button, Input} from './';
 
@@ -27,7 +28,7 @@ const PrepaidItem = styled.div`
 	align-items: center;
 	border-radius: 3px;
 	cursor: pointer;
-	background-color: ${({selected, bgColor}) => selected ? bgColor : 'rgba(0, 0, 0, 0.05)'};
+	background-color: ${({selected, bgColor}) => (selected ? bgColor : 'rgba(0, 0, 0, 0.05)')};
 `;
 
 const PrepaidItemIcon = styled.div`
@@ -38,16 +39,16 @@ const PrepaidItemIcon = styled.div`
 	background-image: url(${({bankSmLogoUrl}) => bankSmLogoUrl});
 	background-size: contain;
 	background-repeat: no-repeat;
-	filter: ${({selected}) => selected ? 'none' : 'grayscale(100%)'};
+	filter: ${({selected}) => (selected ? 'none' : 'grayscale(100%)')};
 `;
 
 const PrepaidItemTitle = styled.div`
 	font-size: 13px;
-	color: ${({selected, textColor}) => selected ? textColor : 'rgba(255, 255, 255, 0.6)'};
+	color: ${({selected, textColor}) => (selected ? textColor : 'rgba(255, 255, 255, 0.6)')};
 `;
 
 const PrepaidItemDescription = styled.div`
-	color: ${({selected, textColor}) => selected ? textColor : 'rgba(255, 255, 255, 0.4)'};
+	color: ${({selected, textColor}) => (selected ? textColor : 'rgba(255, 255, 255, 0.4)')};
 `;
 
 const InputField = styled.div`
@@ -120,18 +121,28 @@ class PrepaidContract extends Component {
 			event.preventDefault();
 		}
 
-		const {sum} = this.state;
-		const {activeCard} = this.props;
+		const {activeCardIndex, sum} = this.state;
+		const {activeCard, inactiveCardsList} = this.props;
+		const selectedCard = inactiveCardsList[activeCardIndex];
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
 			return;
 		}
 
-		this.props.onPaymentSuccess({
+		const options = {
+			method: 'post',
+			url: `/cards/${activeCard.id}/transfer`,
+			data: {
+				target: selectedCard.id,
+				sum
+			}
+		};
+
+		axios(options).then(() => this.props.onPaymentSuccess({
 			sum,
 			number: activeCard.number
-		});
+		}));
 	}
 
 	/**
@@ -151,27 +162,29 @@ class PrepaidContract extends Component {
 
 					<PrepaidItems>
 						{
-							inactiveCardsList.map((card, index) => (
-								<PrepaidItem
-									bgColor={card.theme.bgColor}
-									key={card.id}
-									onClick={() => this.onCardChange(index)}
-									selected={activeCardIndex === index}>
-									<PrepaidItemIcon
-										bankSmLogoUrl={card.theme.bankSmLogoUrl}
-										selected={activeCardIndex === index} />
-									<PrepaidItemTitle
-										textColor={card.theme.textColor}
+							inactiveCardsList
+								.filter((item) => !item.hidden)
+								.map((card, index) => (
+									<PrepaidItem
+										bgColor={card.theme.bgColor}
+										key={card.id}
+										onClick={() => this.onCardChange(index)}
 										selected={activeCardIndex === index}>
-										C банковской карты
-										<PrepaidItemDescription
+										<PrepaidItemIcon
+											bankSmLogoUrl={card.theme.bankSmLogoUrl}
+											selected={activeCardIndex === index} />
+										<PrepaidItemTitle
 											textColor={card.theme.textColor}
 											selected={activeCardIndex === index}>
-											{card.number}
-										</PrepaidItemDescription>
-									</PrepaidItemTitle>
-								</PrepaidItem>
-							))
+											C банковской карты
+											<PrepaidItemDescription
+												textColor={card.theme.textColor}
+												selected={activeCardIndex === index}>
+												{card.number}
+											</PrepaidItemDescription>
+										</PrepaidItemTitle>
+									</PrepaidItem>
+								))
 						}
 					</PrepaidItems>
 
@@ -196,8 +209,7 @@ class PrepaidContract extends Component {
 
 PrepaidContract.propTypes = {
 	activeCard: PropTypes.shape({
-		id: PropTypes.number,
-		theme: PropTypes.object
+		id: PropTypes.number
 	}).isRequired,
 	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired,
 	onPaymentSuccess: PropTypes.func.isRequired

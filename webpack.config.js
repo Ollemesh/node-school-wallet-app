@@ -1,38 +1,3 @@
-/*
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
-
-module.exports = {
-	externals: nodeExternals(),
-	entry: './source/app.js',
-	//target: 'node',
-
-	module: {
-		rules: [{
-				test: /\.js$/,
-				loader: 'babel-loader'
-			},
-			{
-				test: /\.css$/,
-				loader: 'ignore-loader'
-			}
-		]
-	},
-	node: {
-		fs: 'empty'
-	},
-	output: {
-		filename: 'app.js',
-		path: path.resolve(__dirname, 'dist')
-	},
-	resolve: {
-		modules: [
-			path.resolve(__dirname)
-		]
-	}
-	//libraryTarget: 'umd' // ???????????
-};
-*/
 const fs = require('fs');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
