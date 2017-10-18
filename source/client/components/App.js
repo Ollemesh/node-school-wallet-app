@@ -15,8 +15,8 @@ import {
 
 import './fonts.css';
 
-import cardsData from '../../data/cards.json';
-import transactionsData from '../../data/transactions.json';
+import cardsData from '../../../data/cards.json';
+import transactionsData from '../../../data/transactions.json';
 
 injectGlobal([`
 	html,

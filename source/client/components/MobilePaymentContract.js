@@ -79,8 +79,8 @@ class MobilePaymentContract extends Component {
 		super(props);
 
 		this.state = {
-			phoneNumber: '+79218908064',
-			sum: 0,
+			number: '+79218908064',
+			amount: 0,
 			commission: 3
 		};
 	}
@@ -90,14 +90,14 @@ class MobilePaymentContract extends Component {
 	 * @returns {Number}
 	 */
 	getSumWithCommission() {
-		const {sum, commission} = this.state;
+		const {amount, commission} = this.state;
 
-		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
-		if (!isNumber || sum <= 0) {
+		const isNumber = !isNaN(parseFloat(amount)) && isFinite(amount);
+		if (!isNumber || amount <= 0) {
 			return 0;
 		}
 
-		return Number(sum) + Number(commission);
+		return Number(amount) + Number(commission);
 	}
 
 	/**
@@ -109,18 +109,18 @@ class MobilePaymentContract extends Component {
 			event.preventDefault();
 		}
 
-		const {sum, phoneNumber, commission} = this.state;
+		const {amount, number, commission} = this.state;
 
-		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
-		if (!isNumber || sum === 0) {
+		const isNumber = !isNaN(parseFloat(amount)) && isFinite(amount);
+		if (!isNumber || amount === 0) {
 			return;
 		}
 
 		const {activeCard} = this.props;
 
 		axios
-			.post(`/cards/${activeCard.id}/pay`, {phoneNumber, sum})
-			.then(() => this.props.onPaymentSuccess({sum, phoneNumber, commission}));
+			.post(`/cards/${activeCard.id}/pay`, {number, amount})
+			.then(() => this.props.onPaymentSuccess({amount, number, commission}));
 	}
 
 	/**
@@ -155,15 +155,15 @@ class MobilePaymentContract extends Component {
 					<InputField>
 						<Label>Телефон</Label>
 						<InputPhoneNumber
-							name='phoneNumber'
-							value={this.state.phoneNumber}
+							name='number'
+							value={this.state.number}
 							readOnly='true' />
 					</InputField>
 					<InputField>
 						<Label>Сумма</Label>
 						<InputSum
-							name='sum'
-							value={this.state.sum}
+							name='amount'
+							value={this.state.amount}
 							onChange={(event) => this.onChangeInputValue(event)} />
 						<Currency>₽</Currency>
 					</InputField>
