@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node index.js",
 		"test": "jest",
-		"prepush": "./node_modules/eslint/bin/eslint.js ."
+		"prepush": "./node_modules/eslint/bin/eslint.js ./source/ "
 	},
 	"repository": {
 		"type": "git",
