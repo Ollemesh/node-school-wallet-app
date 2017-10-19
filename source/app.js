@@ -62,6 +62,6 @@ const options = {
     cert: fs.readFileSync(path.resolve(__dirname, '../ssl/cert.pem'), 'utf8')
 }
 
-https.createServer(options, app.callback()).listen(443);
+https.createServer(options, app.callback()).listen(config.securePort);
 
 module.exports = app;
