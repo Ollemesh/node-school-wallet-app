@@ -84,7 +84,7 @@ class PrepaidContract extends Component {
 
 		this.state = {
 			activeCardIndex: 0,
-			sum: 0
+			amount: 0
 		};
 	}
 
@@ -121,12 +121,12 @@ class PrepaidContract extends Component {
 			event.preventDefault();
 		}
 
-		const {activeCardIndex, sum} = this.state;
+		const {activeCardIndex, amount} = this.state;
 		const {activeCard, inactiveCardsList} = this.props;
 		const selectedCard = inactiveCardsList[activeCardIndex];
 
-		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
-		if (!isNumber || sum <= 0) {
+		const isNumber = !isNaN(parseFloat(amount)) && isFinite(amount);
+		if (!isNumber || amount <= 0) {
 			return;
 		}
 
@@ -135,12 +135,12 @@ class PrepaidContract extends Component {
 			url: `/cards/${activeCard.id}/transfer`,
 			data: {
 				target: selectedCard.id,
-				sum
+				amount
 			}
 		};
 
 		axios(options).then(() => this.props.onPaymentSuccess({
-			sum,
+			amount,
 			number: activeCard.number
 		}));
 	}
@@ -190,8 +190,8 @@ class PrepaidContract extends Component {
 
 					<InputField>
 						<SumInput
-							name='sum'
-							value={this.state.sum}
+							name='amount'
+							value={this.state.amount}
 							onChange={(event) => this.onChangeInputValue(event)} />
 						<Currency>₽</Currency>
 					</InputField>

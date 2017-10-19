@@ -48,7 +48,7 @@ class Withdraw extends Component {
 
 		this.state = {
 			selectedCard: props.inactiveCardsList[0],
-			sum: 0
+			amount: 0
 		};
 	}
 
@@ -77,11 +77,11 @@ class Withdraw extends Component {
 			event.preventDefault();
 		}
 
-		const {selectedCard, sum} = this.state;
+		const {selectedCard, amount} = this.state;
 		const {activeCard} = this.props;
 
-		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
-		if (!isNumber || sum <= 0) {
+		const isNumber = !isNaN(parseFloat(amount)) && isFinite(amount);
+		if (!isNumber || amount <= 0) {
 			return;
 		}
 
@@ -89,14 +89,14 @@ class Withdraw extends Component {
 			method: 'post',
 			url: `/cards/${activeCard.id}/transfer`,
 			data: {
-				target: selectedCard.id,
-				sum
+				receiverCardId: selectedCard.id,
+				amount
 			}
 		};
 
 		axios(options).then(() => {
 			this.props.onTransaction();
-			this.setState({sum: 0});
+			this.setState({amount: 0});
 		});
 	}
 
@@ -114,8 +114,8 @@ class Withdraw extends Component {
 					<Card type='select' data={inactiveCardsList} />
 					<InputField>
 						<SumInput
-							name='sum'
-							value={this.state.sum}
+							name='amount'
+							value={this.state.amount}
 							onChange={(event) => this.onChangeInputValue(event)} />
 						<Currency>₽</Currency>
 					</InputField>
