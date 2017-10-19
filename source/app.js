@@ -11,7 +11,9 @@ const controller = require('./controller.js');
 const middleware = require('./middleware.js');
 const ReactDOMServer = require('react-dom/server');
 const logger = require('../libs/logger.js')('wallet-app');
+const https = require('https');
 const {renderToStaticMarkup} = require('react-dom/server');
+const fs = require('fs');
 
 const DATA = {
 	user: {
@@ -54,5 +56,12 @@ app.use(serve('./public'));
 app.listen(config.port, () => {
     logger.log('info', 'It\'s alive!')
 });
+
+const options = {
+    key: fs.readFileSync(path.resolve(__dirname, '../ssl/key.pem'), 'utf8'),
+    cert: fs.readFileSync(path.resolve(__dirname, '../ssl/cert.pem'), 'utf8')
+}
+
+https.createServer(options, app.callback()).listen(443);
 
 module.exports = app;
