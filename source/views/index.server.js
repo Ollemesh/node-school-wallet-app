@@ -3378,7 +3378,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-PrepaidLayout-jnpv000', [], [], function createEmotionStyledRules() {
+var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-PrepaidLayout-1q63vm0', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '350px',
 		'display': '-webkit-box; display: -ms-flexbox; display: flex',
@@ -3393,20 +3393,20 @@ var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-PrepaidLayo
 	};
 });
 
-var PrepaidTitle = /*#__PURE__*/(0, _react4.default)(_.Title, 'css-PrepaidTitle-jnpv001', [], [], function createEmotionStyledRules() {
+var PrepaidTitle = /*#__PURE__*/(0, _react4.default)(_.Title, 'css-PrepaidTitle-1q63vm1', [], [], function createEmotionStyledRules() {
 	return {
 		'color': '#fff'
 	};
 });
 
-var PrepaidItems = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItems-jnpv002', [], [], function createEmotionStyledRules() {
+var PrepaidItems = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItems-1q63vm2', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '285px',
 		'marginBottom': '40px'
 	};
 });
 
-var PrepaidItem = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItem-jnpv003', [], [function (_ref) {
+var PrepaidItem = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItem-1q63vm3', [], [function (_ref) {
 	var selected = _ref.selected,
 	    bgColor = _ref.bgColor;
 	return selected ? bgColor : 'rgba(0, 0, 0, 0.05)';
@@ -3423,7 +3423,7 @@ var PrepaidItem = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItem-jnpv
 	};
 });
 
-var PrepaidItemIcon = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemIcon-jnpv004', [], [function (_ref2) {
+var PrepaidItemIcon = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemIcon-1q63vm4', [], [function (_ref2) {
 	var bankSmLogoUrl = _ref2.bankSmLogoUrl;
 	return bankSmLogoUrl;
 }, function (_ref3) {
@@ -3443,7 +3443,7 @@ var PrepaidItemIcon = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemI
 	};
 });
 
-var PrepaidItemTitle = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemTitle-jnpv005', [], [function (_ref4) {
+var PrepaidItemTitle = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemTitle-1q63vm5', [], [function (_ref4) {
 	var selected = _ref4.selected,
 	    textColor = _ref4.textColor;
 	return selected ? textColor : 'rgba(255, 255, 255, 0.6)';
@@ -3454,7 +3454,7 @@ var PrepaidItemTitle = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItem
 	};
 });
 
-var PrepaidItemDescription = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemDescription-jnpv006', [], [function (_ref5) {
+var PrepaidItemDescription = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemDescription-1q63vm6', [], [function (_ref5) {
 	var selected = _ref5.selected,
 	    textColor = _ref5.textColor;
 	return selected ? textColor : 'rgba(255, 255, 255, 0.4)';
@@ -3464,14 +3464,14 @@ var PrepaidItemDescription = /*#__PURE__*/(0, _react4.default)('div', 'css-Prepa
 	};
 });
 
-var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-jnpv007', [], [], function createEmotionStyledRules() {
+var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-1q63vm7', [], [], function createEmotionStyledRules() {
 	return {
 		'margin': '20px 0',
 		'position': 'relative'
 	};
 });
 
-var SumInput = /*#__PURE__*/(0, _react4.default)(_.Input, 'css-SumInput-jnpv008', [], [], function createEmotionStyledRules() {
+var SumInput = /*#__PURE__*/(0, _react4.default)(_.Input, 'css-SumInput-1q63vm8', [], [], function createEmotionStyledRules() {
 	return {
 		'maxWidth': '200px',
 		'paddingRight': '20px',
@@ -3480,7 +3480,7 @@ var SumInput = /*#__PURE__*/(0, _react4.default)(_.Input, 'css-SumInput-jnpv008'
 	};
 });
 
-var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-jnpv009', [], [], function createEmotionStyledRules() {
+var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-1q63vm9', [], [], function createEmotionStyledRules() {
 	return {
 		'fontSize': '12px',
 		'position': 'absolute',
@@ -3508,7 +3508,7 @@ var PrepaidContract = function (_Component) {
 
 		_this.state = {
 			activeCardIndex: 0,
-			sum: 0
+			amount: 0
 		};
 		return _this;
 	}
@@ -3561,15 +3561,15 @@ var PrepaidContract = function (_Component) {
 
 			var _state = this.state,
 			    activeCardIndex = _state.activeCardIndex,
-			    sum = _state.sum;
+			    amount = _state.amount;
 			var _props = this.props,
 			    activeCard = _props.activeCard,
 			    inactiveCardsList = _props.inactiveCardsList;
 
 			var selectedCard = inactiveCardsList[activeCardIndex];
 
-			var isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
-			if (!isNumber || sum <= 0) {
+			var isNumber = !isNaN(parseFloat(amount)) && isFinite(amount);
+			if (!isNumber || amount <= 0) {
 				return;
 			}
 
@@ -3578,13 +3578,13 @@ var PrepaidContract = function (_Component) {
 				url: '/cards/' + activeCard.id + '/transfer',
 				data: {
 					target: selectedCard.id,
-					sum: sum
+					amount: amount
 				}
 			};
 
 			(0, _axios2.default)(options).then(function () {
 				return _this2.props.onPaymentSuccess({
-					sum: sum,
+					amount: amount,
 					number: activeCard.number
 				});
 			});
@@ -3657,8 +3657,8 @@ var PrepaidContract = function (_Component) {
 						InputField,
 						null,
 						_react2.default.createElement(SumInput, {
-							name: 'sum',
-							value: this.state.sum,
+							name: 'amount',
+							value: this.state.amount,
 							onChange: function onChange(event) {
 								return _this3.onChangeInputValue(event);
 							} }),
@@ -3721,7 +3721,7 @@ var _ = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-PrepaidLayout-18c5tyf0', [], [], function createEmotionStyledRules() {
+var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-PrepaidLayout-ilc8nt0', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '350px',
 		'display': '-webkit-box; display: -ms-flexbox; display: flex',
@@ -3735,7 +3735,7 @@ var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-PrepaidLayo
 	};
 });
 
-var CheckIcom = /*#__PURE__*/(0, _react4.default)('div', 'css-CheckIcom-18c5tyf1', [], [], function createEmotionStyledRules() {
+var CheckIcom = /*#__PURE__*/(0, _react4.default)('div', 'css-CheckIcom-ilc8nt1', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '48px',
 		'height': '48px',
@@ -3746,40 +3746,40 @@ var CheckIcom = /*#__PURE__*/(0, _react4.default)('div', 'css-CheckIcom-18c5tyf1
 	};
 });
 
-var Header = /*#__PURE__*/(0, _react4.default)(_.Title, 'css-Header-18c5tyf2', [], [], function createEmotionStyledRules() {
+var Header = /*#__PURE__*/(0, _react4.default)(_.Title, 'css-Header-ilc8nt2', [], [], function createEmotionStyledRules() {
 	return {
 		'color': '#fff'
 	};
 });
 
-var SectionGroup = /*#__PURE__*/(0, _react4.default)('div', 'css-SectionGroup-18c5tyf3', [], [], function createEmotionStyledRules() {
+var SectionGroup = /*#__PURE__*/(0, _react4.default)('div', 'css-SectionGroup-ilc8nt3', [], [], function createEmotionStyledRules() {
 	return {
 		'marginBottom': '20px'
 	};
 });
 
-var Section = /*#__PURE__*/(0, _react4.default)('div', 'css-Section-18c5tyf4', [], [], function createEmotionStyledRules() {
+var Section = /*#__PURE__*/(0, _react4.default)('div', 'css-Section-ilc8nt4', [], [], function createEmotionStyledRules() {
 	return {
 		'marginBottom': '20px',
 		'width': '100%'
 	};
 });
 
-var SectionLabel = /*#__PURE__*/(0, _react4.default)('div', 'css-SectionLabel-18c5tyf5', [], [], function createEmotionStyledRules() {
+var SectionLabel = /*#__PURE__*/(0, _react4.default)('div', 'css-SectionLabel-ilc8nt5', [], [], function createEmotionStyledRules() {
 	return {
 		'fontSize': '13px',
 		'textAlign': 'left'
 	};
 });
 
-var SectionValue = /*#__PURE__*/(0, _react4.default)('div', 'css-SectionValue-18c5tyf6', [], [], function createEmotionStyledRules() {
+var SectionValue = /*#__PURE__*/(0, _react4.default)('div', 'css-SectionValue-ilc8nt6', [], [], function createEmotionStyledRules() {
 	return {
 		'fontSize': '13px',
 		'letterSpacing': '0.6px'
 	};
 });
 
-var RepeatPayment = /*#__PURE__*/(0, _react4.default)('button', 'css-RepeatPayment-18c5tyf7', [], [], function createEmotionStyledRules() {
+var RepeatPayment = /*#__PURE__*/(0, _react4.default)('button', 'css-RepeatPayment-ilc8nt7', [], [], function createEmotionStyledRules() {
 	return {
 		'fontSize': '13px',
 		'backgroundColor': 'rgba(0, 0, 0, 0.08)',
@@ -3804,7 +3804,7 @@ var RepeatPayment = /*#__PURE__*/(0, _react4.default)('button', 'css-RepeatPayme
 var PrepaidSuccess = function PrepaidSuccess(_ref) {
 	var transaction = _ref.transaction,
 	    repeatPayment = _ref.repeatPayment;
-	var sum = transaction.sum,
+	var amount = transaction.amount,
 	    number = transaction.number;
 
 
@@ -3859,7 +3859,7 @@ var PrepaidSuccess = function PrepaidSuccess(_ref) {
 				_react2.default.createElement(
 					SectionValue,
 					null,
-					sum,
+					amount,
 					' \u20BD'
 				)
 			)
@@ -3874,7 +3874,7 @@ var PrepaidSuccess = function PrepaidSuccess(_ref) {
 
 PrepaidSuccess.propTypes = {
 	transaction: _propTypes2.default.shape({
-		sum: _propTypes2.default.string,
+		amount: _propTypes2.default.string,
 		number: _propTypes2.default.string
 	}).isRequired,
 	repeatPayment: _propTypes2.default.func.isRequired
@@ -4582,13 +4582,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var WithdrawTitle = /*#__PURE__*/(0, _react4.default)(_.Title, 'css-WithdrawTitle-69rs8b0', [], [], function createEmotionStyledRules() {
+var WithdrawTitle = /*#__PURE__*/(0, _react4.default)(_.Title, 'css-WithdrawTitle-qw5z9j0', [], [], function createEmotionStyledRules() {
 	return {
 		'textAlign': 'center'
 	};
 });
 
-var WithdrawLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-WithdrawLayout-69rs8b1', [], [], function createEmotionStyledRules() {
+var WithdrawLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-WithdrawLayout-qw5z9j1', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '440px',
 		'display': '-webkit-box; display: -ms-flexbox; display: flex',
@@ -4602,14 +4602,14 @@ var WithdrawLayout = /*#__PURE__*/(0, _react4.default)(_.Island, 'css-WithdrawLa
 	};
 });
 
-var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-69rs8b2', [], [], function createEmotionStyledRules() {
+var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-qw5z9j2', [], [], function createEmotionStyledRules() {
 	return {
 		'margin': '20px 0',
 		'position': 'relative'
 	};
 });
 
-var SumInput = /*#__PURE__*/(0, _react4.default)(_.Input, 'css-SumInput-69rs8b3', [], [], function createEmotionStyledRules() {
+var SumInput = /*#__PURE__*/(0, _react4.default)(_.Input, 'css-SumInput-qw5z9j3', [], [], function createEmotionStyledRules() {
 	return {
 		'maxWidth': '200px',
 		'paddingRight': '20px',
@@ -4618,7 +4618,7 @@ var SumInput = /*#__PURE__*/(0, _react4.default)(_.Input, 'css-SumInput-69rs8b3'
 	};
 });
 
-var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-69rs8b4', [], [], function createEmotionStyledRules() {
+var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-qw5z9j4', [], [], function createEmotionStyledRules() {
 	return {
 		'fontSize': '12px',
 		'position': 'absolute',
@@ -4645,7 +4645,7 @@ var Withdraw = function (_Component) {
 
 		_this.state = {
 			selectedCard: props.inactiveCardsList[0],
-			sum: 0
+			amount: 0
 		};
 		return _this;
 	}
@@ -4687,12 +4687,12 @@ var Withdraw = function (_Component) {
 
 			var _state = this.state,
 			    selectedCard = _state.selectedCard,
-			    sum = _state.sum;
+			    amount = _state.amount;
 			var activeCard = this.props.activeCard;
 
 
-			var isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
-			if (!isNumber || sum <= 0) {
+			var isNumber = !isNaN(parseFloat(amount)) && isFinite(amount);
+			if (!isNumber || amount <= 0) {
 				return;
 			}
 
@@ -4700,14 +4700,14 @@ var Withdraw = function (_Component) {
 				method: 'post',
 				url: '/cards/' + activeCard.id + '/transfer',
 				data: {
-					target: selectedCard.id,
-					sum: sum
+					receiverCardId: selectedCard.id,
+					amount: amount
 				}
 			};
 
 			(0, _axios2.default)(options).then(function () {
 				_this2.props.onTransaction();
-				_this2.setState({ sum: 0 });
+				_this2.setState({ amount: 0 });
 			});
 		}
 
@@ -4742,8 +4742,8 @@ var Withdraw = function (_Component) {
 						InputField,
 						null,
 						_react2.default.createElement(SumInput, {
-							name: 'sum',
-							value: this.state.sum,
+							name: 'amount',
+							value: this.state.amount,
 							onChange: function onChange(event) {
 								return _this3.onChangeInputValue(event);
 							} }),
@@ -5493,13 +5493,13 @@ module.exports = require("card-info");
 /* 131 */
 /***/ (function(module, exports) {
 
-module.exports = [{"id":1,"cardNumber":"546925000000000","balance":230576},{"id":2,"cardNumber":"676230000000000","balance":6},{"id":3,"cardNumber":"405870000000000","balance":700},{"id":4,"cardNumber":"550064000000000","balance":2},{"id":5,"cardNumber":"437784000000000","balance":4545},{"id":6,"cardNumber":"676803000000000","balance":120}]
+module.exports = [{"id":1,"cardNumber":"546925000000000","balance":230453},{"id":2,"cardNumber":"676230000000000","balance":4},{"id":3,"cardNumber":"405870000000000","balance":700},{"id":4,"cardNumber":"550064000000000","balance":2},{"id":5,"cardNumber":"437784000000000","balance":4545},{"id":6,"cardNumber":"676803000000000","balance":119}]
 
 /***/ }),
 /* 132 */
 /***/ (function(module, exports) {
 
-module.exports = [{"id":1,"cardId":1,"type":"prepaidCard","data":"220003000000003","time":"2017-08-9T05:28:31+03:00","sum":"2345"},{"id":2,"cardId":1,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-08-8T06:28:31+03:00","sum":"-25"},{"id":3,"cardId":1,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":4,"cardId":1,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T12:28:31+03:00","sum":"2345"},{"id":5,"cardId":1,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T11:28:31+03:00","sum":"-25"},{"id":6,"cardId":1,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:29:31+03:00","sum":"-174"},{"id":7,"cardId":1,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:35+03:00","sum":"-174"},{"id":8,"cardId":2,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":9,"cardId":2,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":10,"cardId":2,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":11,"cardId":2,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":12,"cardId":2,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":13,"cardId":2,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":14,"cardId":3,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":15,"cardId":3,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":16,"cardId":4,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":17,"cardId":4,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":18,"cardId":4,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":19,"cardId":4,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":20,"cardId":4,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":21,"cardId":4,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":21,"cardId":"1","type":"card2phone","data":"+79218908064","time":"2017-10-18T16:11:11.208Z","sum":"123"},{"id":22,"cardId":"1","type":"card2phone","data":"+79218908064","time":"2017-10-18T16:14:04.268Z","sum":"132"},{"id":23,"cardId":"1","type":"card2phone","data":"+79218908064","time":"2017-10-18T19:16:24.384Z","sum":"123"},{"id":24,"cardId":"1","type":"card2phone","data":"8-950-028-10-79","time":"2017-10-18T20:10:39.995Z","sum":"1"},{"id":25,"cardId":"1","type":"phone2card","data":"8-950-028-10-79","time":"2017-10-18T20:13:09.843Z","sum":"1"},{"id":26,"cardId":"1","type":"spend","data":"transfer to cardId 2","time":"2017-10-18T20:13:14.104Z","sum":"1"},{"id":27,"cardId":"2","type":"receive","data":"transfer from cardId 1","time":"2017-10-18T20:13:14.105Z","sum":"1"},{"id":28,"cardId":"1","type":"spend","data":"transfer to cardId 2","time":"2017-10-18T20:13:52.035Z","sum":"1"},{"id":29,"cardId":"2","type":"receive","data":"transfer from cardId 1","time":"2017-10-18T20:13:52.050Z","sum":"1"},{"id":30,"cardId":"1","type":"spend","data":"transfer to cardId 2","time":"2017-10-18T20:15:23.576Z","sum":"1"},{"id":31,"cardId":"2","type":"receive","data":"transfer from cardId 1","time":"2017-10-18T20:15:23.594Z","sum":"1"},{"id":32,"cardId":"1","type":"spend","data":"transfer to cardId 2","time":"2017-10-18T20:35:57.876Z","sum":"1"},{"id":33,"cardId":"2","type":"receive","data":"transfer from cardId 1","time":"2017-10-18T20:35:57.893Z","sum":"1"},{"type":"prepaidCard","data":"99999999999999","sum":"2345","cardId":"2","time":"2017-10-18T20:50:36.535Z","id":34},{"type":"prepaidCard","data":"99999999999999","sum":"2345","cardId":"2","time":"2017-10-18T20:51:00.807Z","id":35},{"cardId":"1","type":"card2phone","data":"8-950-028-10-79","sum":"1","time":"2017-10-18T20:51:47.382Z","id":36},{"cardId":"1","type":"card2phone","data":"8-950-028-10-79","sum":"1","time":"2017-10-18T20:51:57.503Z","id":37},{"cardId":"1","type":"phone2card","data":"8-950-028-10-79","sum":"1","time":"2017-10-18T20:52:03.074Z","id":38},{"cardId":"1","type":"spend","data":"transfer to cardId 2","sum":"1","time":"2017-10-18T20:52:30.549Z","id":39},{"cardId":"2","type":"receive","data":"transfer from cardId 1","sum":"1","time":"2017-10-18T20:52:30.551Z","id":40},{"cardId":"1","type":"card2phone","data":"+79218908064","sum":"123","time":"2017-10-18T21:01:48.422Z","id":41},{"cardId":"1","type":"card2phone","data":"+79218908064","sum":"123","time":"2017-10-18T21:02:09.810Z","id":42},{"type":"prepaidCard","data":"99999999999999","sum":321,"cardId":2,"time":"2017-10-18T21:59:31.011Z","id":43},{"type":"prepaidCard","data":"99999999999999","sum":123,"cardId":2,"time":"2017-10-18T21:59:57.920Z","id":44}]
+module.exports = [{"id":1,"cardId":1,"type":"prepaidCard","data":"220003000000003","time":"2017-08-9T05:28:31+03:00","sum":"2345"},{"id":2,"cardId":1,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-08-8T06:28:31+03:00","sum":"-25"},{"id":3,"cardId":1,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":4,"cardId":1,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T12:28:31+03:00","sum":"2345"},{"id":5,"cardId":1,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T11:28:31+03:00","sum":"-25"},{"id":6,"cardId":1,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:29:31+03:00","sum":"-174"},{"id":7,"cardId":1,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:35+03:00","sum":"-174"},{"id":8,"cardId":2,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":9,"cardId":2,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":10,"cardId":2,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":11,"cardId":2,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":12,"cardId":2,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":13,"cardId":2,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":14,"cardId":3,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":15,"cardId":3,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":16,"cardId":4,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":17,"cardId":4,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":18,"cardId":4,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":19,"cardId":4,"type":"prepaidCard","data":"220003000000003","time":"2017-10-02T13:28:31+03:00","sum":"2345"},{"id":20,"cardId":4,"type":"paymentMobile","data":"+7(921)3333333","time":"2017-10-02T13:28:31+03:00","sum":"-25"},{"id":21,"cardId":4,"type":"card2Card","data":"220003000000005","time":"2017-10-02T13:28:31+03:00","sum":"-174"},{"id":21,"cardId":"1","type":"card2phone","data":"+79218908064","time":"2017-10-18T16:11:11.208Z","sum":"123"},{"id":22,"cardId":"1","type":"card2phone","data":"+79218908064","time":"2017-10-18T16:14:04.268Z","sum":"132"},{"id":23,"cardId":"1","type":"card2phone","data":"+79218908064","time":"2017-10-18T19:16:24.384Z","sum":"123"},{"id":24,"cardId":"1","type":"card2phone","data":"8-950-028-10-79","time":"2017-10-18T20:10:39.995Z","sum":"1"},{"id":25,"cardId":"1","type":"phone2card","data":"8-950-028-10-79","time":"2017-10-18T20:13:09.843Z","sum":"1"},{"id":26,"cardId":"1","type":"spend","data":"transfer to cardId 2","time":"2017-10-18T20:13:14.104Z","sum":"1"},{"id":27,"cardId":"2","type":"receive","data":"transfer from cardId 1","time":"2017-10-18T20:13:14.105Z","sum":"1"},{"id":28,"cardId":"1","type":"spend","data":"transfer to cardId 2","time":"2017-10-18T20:13:52.035Z","sum":"1"},{"id":29,"cardId":"2","type":"receive","data":"transfer from cardId 1","time":"2017-10-18T20:13:52.050Z","sum":"1"},{"id":30,"cardId":"1","type":"spend","data":"transfer to cardId 2","time":"2017-10-18T20:15:23.576Z","sum":"1"},{"id":31,"cardId":"2","type":"receive","data":"transfer from cardId 1","time":"2017-10-18T20:15:23.594Z","sum":"1"},{"id":32,"cardId":"1","type":"spend","data":"transfer to cardId 2","time":"2017-10-18T20:35:57.876Z","sum":"1"},{"id":33,"cardId":"2","type":"receive","data":"transfer from cardId 1","time":"2017-10-18T20:35:57.893Z","sum":"1"},{"type":"prepaidCard","data":"99999999999999","sum":"2345","cardId":"2","time":"2017-10-18T20:50:36.535Z","id":34},{"type":"prepaidCard","data":"99999999999999","sum":"2345","cardId":"2","time":"2017-10-18T20:51:00.807Z","id":35},{"cardId":"1","type":"card2phone","data":"8-950-028-10-79","sum":"1","time":"2017-10-18T20:51:47.382Z","id":36},{"cardId":"1","type":"card2phone","data":"8-950-028-10-79","sum":"1","time":"2017-10-18T20:51:57.503Z","id":37},{"cardId":"1","type":"phone2card","data":"8-950-028-10-79","sum":"1","time":"2017-10-18T20:52:03.074Z","id":38},{"cardId":"1","type":"spend","data":"transfer to cardId 2","sum":"1","time":"2017-10-18T20:52:30.549Z","id":39},{"cardId":"2","type":"receive","data":"transfer from cardId 1","sum":"1","time":"2017-10-18T20:52:30.551Z","id":40},{"cardId":"1","type":"card2phone","data":"+79218908064","sum":"123","time":"2017-10-18T21:01:48.422Z","id":41},{"cardId":"1","type":"card2phone","data":"+79218908064","sum":"123","time":"2017-10-18T21:02:09.810Z","id":42},{"type":"prepaidCard","data":"99999999999999","sum":321,"cardId":2,"time":"2017-10-18T21:59:31.011Z","id":43},{"type":"prepaidCard","data":"99999999999999","sum":123,"cardId":2,"time":"2017-10-18T21:59:57.920Z","id":44},{"cardId":"1","type":"card2phone","data":"+79218908064","sum":"123","time":"2017-10-19T09:27:28.313Z","id":45},{"cardId":"2","type":"card2phone","data":"+79218908064","sum":"3","time":"2017-10-19T09:28:05.407Z","id":46},{"cardId":"6","type":"spend","data":"transfer to cardId 2","sum":"1","time":"2017-10-19T09:41:53.076Z","id":47},{"cardId":2,"type":"receive","data":"transfer from cardId 6","sum":"1","time":"2017-10-19T09:41:53.122Z","id":48}]
 
 /***/ })
 /******/ ]);
